@@ -21,8 +21,9 @@ const config: Config = {
         "worksans": ['"Work Sans"', 'sans-serif'],
       },
       colors: {
+        primary: "#00afef",
         townhall: {
-          background:"var(--background)",
+          background: "var(--background)",
           black50: "var(--black-50)",
           black100: "var(--black-100)",
           neutral400: "var(--neutral-400)",
