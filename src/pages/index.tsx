@@ -10,7 +10,7 @@ const API_URL = process.env.API_URL;
 
 
 
-function index() {
+function Index() {
   const [postsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit] = useState(50);
@@ -88,4 +88,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;
