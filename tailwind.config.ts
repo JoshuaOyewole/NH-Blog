@@ -13,6 +13,21 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      screens: {
+        "3xl": "1920px",
+      },
+      fontFamily: {
+        'roboto-slab': ['"Roboto Slab"', 'serif'],
+        "worksans": ['"Work Sans"', 'sans-serif'],
+      },
+      colors: {
+        townhall: {
+          background:"var(--background)",
+          black50: "var(--black-50)",
+          black100: "var(--black-100)",
+          neutral400: "var(--neutral-400)",
+        },
+      }
     },
   },
   plugins: [],
