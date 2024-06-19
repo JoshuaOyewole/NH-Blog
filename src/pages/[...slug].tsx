@@ -26,10 +26,10 @@ const sans = Open_Sans({
 function Page() {
     const router = useRouter();
 
-    const slug = router.query.slug;
-    if (!slug) return null;
+    const slug = router.query.slug??[];
+   // if (!slug) return null;
 
-    const post_id = Array.isArray(slug) && slug[1]
+    const post_id = slug[1];
 
 
 
