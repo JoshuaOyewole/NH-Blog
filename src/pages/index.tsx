@@ -26,7 +26,7 @@ function Index() {
 
   if (isLoading) {
     return (
-      <div className="w-3/5 mx-auto grid gap-y-5 py-6">
+      <div className="w-4/5 lg:w-3/5 mx-auto grid gap-y-5 py-6">
         <LoadingSkeleton />
         <LoadingSkeleton />
         <LoadingSkeleton />
@@ -59,14 +59,14 @@ function Index() {
     <div className="bg-townhall-background font-worksans -mt-5">
       <header className="mt-0 mx-auto">
         <BlogNavbar />
-        <h1 className="text-townhall-black100 font-roboto-slab text-6xl font-semibold w-4/5 mx-auto my-0 text-center mt-10">Townhall Team Updates</h1>
+        <h1 className="text-townhall-black100 font-roboto-slab leading-[3rem] text-4xl lg:text-6xl font-semibold w-4/5 mx-auto my-0 text-center mt-10">Townhall Team Updates</h1>
         <p className="text-center mt-4 text-townhall-black50 font-worksans text-[1.3125rem] font-medium">
           Here on our blog, we give regular progress updates to our Users.
         </p>
       </header>
       <main>
-        <h2 className="text-townhall-black100 font-roboto-slab text-4xl font-semibold w-4/5 mx-auto my-0 text-center mt-40 mb-20">Recent Posts</h2>
-        <div className="grid lg:grid-cols-2 my-5 w-4/5 mx-auto justify-center gap-x-14 3xl:grid-cols-3 gap-y-20 mb-40">
+        <h2 className="text-townhall-black100 font-roboto-slab text-3xl lg:text-4xl font-semibold lg:w-[90%] min-[1280px]:w-4/5 mx-auto my-0 text-center mt-40 mb-20">Recent Posts</h2>
+        <div className="grid md:grid-cols-2 my-5 w-[90%] lg:w-[90%] min-[1280px]:w-4/5 mx-auto justify-center md:gap-x-7 lg:gap-x-14 3xl:grid-cols-3 gap-y-20 mb-40">
 
           {
             Array.isArray(currentPosts) && currentPosts.length > 0 && currentPosts.map((a: IArticle) => <BlogCard {...a} key={a.id} />)
