@@ -7,7 +7,7 @@ type Props = {}
 
 function BlogFooter({ }: Props) {
     return (
-        <div className='bg-[#eff8ff] px-[7.6rem] py-8 flex flex-col'>
+        <footer className='bg-[#eff8ff] px-[7.6rem] py-8 flex flex-col justify-between'>
             <div className="flex justify-between items-center">
                 <Link href={"https://townhall.mobi"}>
                     <Image src={logo} alt='Townhall Logo' height={40} width={40} />
@@ -20,10 +20,10 @@ function BlogFooter({ }: Props) {
                     </li>
                 </ul>
             </div>
-            <p className='text-center mb-4 mt-6'>
+            <p className='text-center mb-4 mt-6 text-[#41505f]'>
                 Copyright © 2024| All Rights Reserved
             </p>
-        </div>
+        </footer>
     )
 }
 

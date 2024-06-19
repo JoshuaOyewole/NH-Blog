@@ -1,14 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import logo from "../../../public/assets/images/newLogo.png"
+import { Avatar } from '@radix-ui/themes'
 
 type Props = {}
 
 function BlogNavbar({ }: Props) {
   return (
-    <nav className='flex justify-between h-36 items-start w-4/5 mx-auto'>
+    <nav className='flex w-full justify-between h-36 items-start lg:w-4/5 mx-auto'>
       <Link href={"/"} className='flex items-center'>
-        <Image src={logo} alt='Townhall logo' width={130} height={130} priority className='w-48 h-auto'/>
+
+        <Image src={logo} alt='Townhall logo' width={130} height={130} priority className='w-[10rem] h-auto' />
       </Link>
     </nav>
   )
