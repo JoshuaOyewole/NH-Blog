@@ -26,8 +26,8 @@ const sans = Open_Sans({
 function Page() {
     const router = useRouter();
 
-    const slug = router.query.slug??[];
-   // if (!slug) return null;
+    const slug = router.query.slug ?? [];
+    // if (!slug) return null;
 
     const post_id = slug[1];
 
@@ -66,7 +66,6 @@ function Page() {
 
     return (
         <React.Fragment>
-
             <Head>
                 <title>{title}</title>
                 <meta property="og:title" content={title} key="title" />

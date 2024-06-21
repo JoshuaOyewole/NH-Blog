@@ -5,6 +5,7 @@ import LoadingSkeleton from "@/components/Loading/LoadingSkeleton";
 import Pagination from "@/components/Pagination";
 import { IArticle } from "@/models/blog";
 import { useQuery } from "@tanstack/react-query";
+import Head from "next/head";
 import { useState } from "react";
 const API_URL = process.env.API_URL;
 
@@ -56,7 +57,16 @@ function Index() {
 
 
   return (
-    <div className="bg-townhall-background font-worksans -mt-5">
+
+    <>
+     <Head>
+        <title>Townhall Blog | Team Updates</title>
+        <meta
+          name="description"
+          content="Welcome to Townhall. Townhall is a community mobilization app that enables organizations, the public, and causes to create & efficiently manage localized assemblies, interaction, and momentum around common goals."
+        />
+      </Head>
+      <div className="bg-townhall-background font-worksans -mt-5">
       <header className="mt-0 mx-auto">
         <BlogNavbar />
         <h1 className="text-townhall-black100 font-roboto-slab leading-[3rem] text-4xl lg:text-6xl font-semibold w-4/5 mx-auto my-0 text-center mt-10">Townhall Team Updates</h1>
@@ -85,6 +95,8 @@ function Index() {
       </main>
       <BlogFooter />
     </div>
+    </>
+  
   );
 }
 
