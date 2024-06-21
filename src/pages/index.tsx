@@ -60,7 +60,7 @@ function Index() {
 
     <>
      <Head>
-        <title>Townhall Blog | Team Updates</title>
+        <title>Townhall Blog - Team Updates</title>
         <meta
           name="description"
           content="Welcome to Townhall. Townhall is a community mobilization app that enables organizations, the public, and causes to create & efficiently manage localized assemblies, interaction, and momentum around common goals."
