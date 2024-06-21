@@ -30,3 +30,4 @@ jobs:
     - name: Change Directory
       run: cd /var/www/blog-app/actions-runner/blog-app/blog-app/blog-app
     - run: pm2 restart 1   
+
