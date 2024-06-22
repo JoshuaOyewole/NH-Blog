@@ -5,12 +5,24 @@ import { Open_Sans } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import BlogNavbar from "@/components/Blog/Navbar";
+import { Metadata, ResolvingMetadata } from "next";
+import { generateSlug, removeHtmlTags } from "@/lib/utils";
 
 const sans = Open_Sans({
   subsets: ['latin'],
   display: 'swap',
 })
 
+interface PageProps {
+  params: {
+    slug: string[]
+  }
+}
+
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
 interface IPost {
   id: number,
@@ -95,6 +107,7 @@ export async function getStaticPaths() {
   const response = await res.json();
   const posts = response.data;
 
+
   // Get the paths we want to pre-render based on posts
   const paths = posts.map((post: IPost) => ({
     params: { id: post.id.toString() },
@@ -105,11 +118,31 @@ export async function getStaticPaths() {
   return { paths, fallback: false }
 }
 
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+
+  const id = params.id;
+
+  const article = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${id}`).then((res) => res.json())
+
+
+
+  if (!article.data) {
+    return {}
+  }
+
+  return {
+    title: "This is just a starting title for everyone to see",
+    description: removeHtmlTags(article.data.blog_body, 150),
+  }
+}
+
 // This also gets called at build time
 export async function getStaticProps({ params }: any) {
   // params contains the post `id`.
   // If the route is like /posts/1, then params.id is 1
-  console.log(params);
 
   const res = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${params.id}`)
   const post = await res.json()
