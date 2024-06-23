@@ -36,7 +36,7 @@ const Pagination = ({ currentPage, isLastPage, totalPages, onPageChange }: IProp
                         onClick={prevPage}
                         disabled={currentPage === 1}
                         variant="solid"
-                        className={` px-3 py-2 rounded-md   ${currentPage === 1 ? "bg-gray-300 hover:pointer-events-none" : "bg-primary text-white hover:bg-[#006f98] hover:transition-colors hover:ease-out"}`}
+                        className={` !px-3 !py-2 !rounded-md   ${currentPage === 1 ? "!bg-gray-300 !hover:pointer-events-none" : "!bg-primary !text-white !hover:bg-[#006f98] !hover:transition-colors !hover:ease-out"}`}
                     >
                         Prev
                     </Button>
@@ -44,7 +44,7 @@ const Pagination = ({ currentPage, isLastPage, totalPages, onPageChange }: IProp
                 {Array.from({ length: totalPages }, (_, i) => i).map((pageNumber) => (
 
                     <li
-                        className="me-2 d-none d-xl-flex xl-justify-content-cente xl-align-items-center"
+                        className="!me-2 d-none d-xl-flex xl-justify-content-cente xl-align-items-center"
                         key={pageNumber + 1}
                     >
                         <Button
@@ -64,7 +64,7 @@ const Pagination = ({ currentPage, isLastPage, totalPages, onPageChange }: IProp
                     <Button
                         onClick={nextPage}
                         disabled={isLastPage}
-                        className={`px-3 py-2 rounded-md  ${!isLastPage ? "hover:hover:bg-[#006f98] transition-colors hover:ease-out text-white bg-primary" : "bg-gray-300 "}`}
+                        className={`!px-3 !py-2 !rounded-md  ${!isLastPage ? "!hover:bg-[#006f98] !transition-colors !hover:ease-out 1text-white !bg-primary" : "!bg-gray-300 "}`}
                     >
                         Next
                     </Button>

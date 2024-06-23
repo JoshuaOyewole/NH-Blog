@@ -104,7 +104,7 @@ export default function Post(post: IPostt) {
               <Image src={post.post.data.posted_by_image} className='rounded-full h-[5rem] w-[5rem] lg:h-[9rem] lg:w-[9rem] object-cover' width={200} height={200} alt={`Author name is ${post.post.data.postedby_name}`} />
             </Box>
 
-            <div className="author-info flex flex-col basis-[70%] min-[1800px]:gap-y-4 min-[1800px]:flex-1">
+            <div className="author-info rounded-2xl py-2 px-4 lg:py-5 flex flex-col basis-[70%] min-[1800px]:gap-y-4 min-[1800px]:flex-1">
               <h3 className='text-[1.25rem] font-semibold min-[414px]:font-medium min-[414px]:text-2xl text-[#41505f] mb-2 min-[1800px]:text-4xl '>{post.post.data.postedby_name}</h3>
               <Text className='text-[#41505f] text-sm min-[1800px]:text-2xl'>{post.post.data.posted_by_about}</Text>
             </div>
