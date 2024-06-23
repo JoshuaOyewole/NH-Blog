@@ -13,12 +13,6 @@ const sans = Open_Sans({
   display: 'swap',
 })
 
-interface PageProps {
-  params: {
-    slug: string[]
-  }
-}
-
 type Props = {
   params: { id: string }
   searchParams: { [key: string]: string | string[] | undefined }
@@ -52,10 +46,7 @@ interface IPostt {
     }
   }
 }
-
-function Post(post: IPostt) {
-
-
+export default function Post(post: IPostt) {
   return (
     <>
       <BlogNavbar />
@@ -118,24 +109,29 @@ export async function getStaticPaths() {
   return { paths, fallback: false }
 }
 
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const id = params.id
 
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
+  // fetch data
+  const product = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${params.id}`).then((res) => res.json());
 
-  const id = params.id;
+  console.log("Hello world");
+  console.log(product);
+  
+  
 
-  const article = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${id}`).then((res) => res.json())
-
-
-
-  if (!article.data) {
-    return {}
-  }
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || []
 
   return {
-    title: "This is just a starting title for everyone to see",
-    description: removeHtmlTags(article.data.blog_body, 150),
+    title: "Hello world",
+    openGraph: {
+      images: ['/some-specific-page-image.jpg', ...previousImages],
+    },
   }
 }
 
@@ -143,7 +139,6 @@ export async function generateMetadata({
 export async function getStaticProps({ params }: any) {
   // params contains the post `id`.
   // If the route is like /posts/1, then params.id is 1
-
   const res = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${params.id}`)
   const post = await res.json()
 
@@ -151,4 +146,3 @@ export async function getStaticProps({ params }: any) {
   return { props: { post } }
 }
 
-export default Post
