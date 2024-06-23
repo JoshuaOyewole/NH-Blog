@@ -53,7 +53,7 @@ export default function Post(post: IPostt) {
       <Head>
         <title>{post.post.data.title}</title>
         <meta property="og:title" content={post.post.data.title} key="title" />
-        <meta name="description" content={`${removeHtmlTags(post.post.data.blog_body, 120)}`} />
+        <meta name="description" content={`${removeHtmlTags(post.post.data.blog_body, 160)}`} />
         <meta property="og:image" content={post.post.data.blog_media[0].thumbnail} />
         <meta property="og:url" content={post.post.data.blog_media[0].thumbnail} />
         <meta name="twitter:card" content={`${removeHtmlTags(post.post.data.blog_body, 160)}`} />
@@ -62,7 +62,13 @@ export default function Post(post: IPostt) {
         <meta name="twitter:image" content={post.post.data.blog_media[0].thumbnail} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index,follow" />
-       {/*  <link rel="canonical" href={window.location.href} /> */}
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Townhall Blog" />
+        <meta property="og:image:url" content={post.post.data.blog_media[0].thumbnail} />
+        <meta property="og:image:width" content="1800" />
+        <meta property="og:image:height" content="1600" />
+        <meta property="og:locale" content="en_US" />
+        {/*  <link rel="canonical" href={window.location.href} /> */}
       </Head>
       <BlogNavbar />
       <div className={`flex flex-col lg:flex-row gap-x-10 w-full md:w-[95%] lg:w-[90%] min-[1280px]:w-4/5 mx-auto px-4 lg:px-8 ${sans.className} mb-20`}>
