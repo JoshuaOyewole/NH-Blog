@@ -62,7 +62,7 @@ export default function Post(post: IPostt) {
         <meta name="twitter:image" content={post.post.data.blog_media[0].thumbnail} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index,follow" />
-        <link rel="canonical" href={window.location.href} />
+       {/*  <link rel="canonical" href={window.location.href} /> */}
       </Head>
       <BlogNavbar />
       <div className={`flex flex-col lg:flex-row gap-x-10 w-full md:w-[95%] lg:w-[90%] min-[1280px]:w-4/5 mx-auto px-4 lg:px-8 ${sans.className} mb-20`}>
