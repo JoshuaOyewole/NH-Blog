@@ -5,9 +5,11 @@ import { Open_Sans } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import BlogNavbar from "@/components/Blog/Navbar";
-import { Metadata, ResolvingMetadata } from "next";
 import { generateSlug, removeHtmlTags } from "@/lib/utils";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import BlogFooter from "@/components/Blog/BlogFooter";
+const API_URL = process.env.API_URL;
 
 const sans = Open_Sans({
   subsets: ['latin'],
@@ -15,7 +17,7 @@ const sans = Open_Sans({
 })
 
 type Props = {
-  params: { id: string }
+  params: { id: string, currentPage?: number, slug: string }
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
@@ -27,6 +29,7 @@ interface IPost {
   postedby_name: string,
   postedby_id: number,
   posted_by_image: string,
+  slug: string,
   blog_media: {}[]
 }
 interface IPostt {
@@ -48,6 +51,12 @@ interface IPostt {
   }
 }
 export default function Post(post: IPostt) {
+  const router = useRouter();
+
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       <Head>
@@ -86,7 +95,7 @@ export default function Post(post: IPostt) {
             </span>
           </div>
           <div className="article_img h-[20rem] lg:h-[25rem] min-[2000px]:h-[40rem] my-5 md:my-10 bg-cover bg-center rounded-xl" style={{ backgroundImage: `url(${post.post.data.blog_media[0]?.thumbnail})` }}>
-            <Image src={post.post.data.blog_media[0].thumbnail} alt={post.post.data.title} className='w-full h-[25rem] rounded-lg bg-center' width={200} height={100} />
+            {/*   <Image src={post.post.data.blog_media[0].thumbnail} alt={post.post.data.title} className='w-full h-[25rem] rounded-lg bg-center' width={200} height={100} /> */}
           </div>
           <div dangerouslySetInnerHTML={{ __html: post.post.data.blog_body }} className='mt-10 lg:text-lg min-[2000px]:text-[2rem] min-[2000px]:!leading-[4rem] !leading-[2.4rem] text-[#41505f]' />
 
@@ -106,6 +115,7 @@ export default function Post(post: IPostt) {
 
         </aside>
       </div>
+      <BlogFooter />
     </>
 
   )
@@ -113,16 +123,30 @@ export default function Post(post: IPostt) {
   // Render post...
 }
 
+export async function getStaticProps({ params }: Props) {
+
+  const { id, slug } = params;
+
+  const res = await fetch(`${API_URL}/blog/writeup_details?id=${params.id}`)
+  const post = await res.json()
+  return { props: { post } }
+}
+
 // This function gets called at build time
 export async function getStaticPaths() {
-  const res = await fetch('https://townhall.empl-dev.site/api/blog/list_writeups?currentPage=1&limit=10')
+  const res = await fetch(`${API_URL}/blog/list_writeups?currentPage=${1}&limit=100`)
   const response = await res.json();
   const posts = response.data;
+  const posts_with_Slug = posts.map((a:IPost)=>({
+    ...a,
+    slug: generateSlug(a.title)
+
+}))
 
 
   // Get the paths we want to pre-render based on posts
-  const paths = posts.map((post: IPost) => ({
-    params: { id: post.id.toString() },
+  const paths = posts_with_Slug.map((post: IPost) => ({
+    params: { id: post.id.toString(), slug: post.slug },
   }))
 
   // We'll pre-render only these paths at build time.
@@ -130,12 +154,12 @@ export async function getStaticPaths() {
   return { paths, fallback: false }
 }
 
-export async function generateMetadata(
+/* export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const id = params.id
-  const res = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${id}`).then((res) => res.json());
+  const res = await fetch(`${API_URL}/blog/writeup_details?id=${id}`).then((res) => res.json());
 
   const article = res.data;
   // optionally access and extend (rather than replace) parent metadata
@@ -148,12 +172,5 @@ export async function generateMetadata(
       images: ['/some-specific-page-image.jpg', ...previousImages],
     },
   }
-}
-
-// This also gets called at build time
-export async function getStaticProps({ params }: any) {
-  const res = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${params.id}`)
-  const post = await res.json()
-  return { props: { post } }
-}
+} */
 

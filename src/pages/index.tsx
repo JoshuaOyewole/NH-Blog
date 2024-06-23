@@ -3,12 +3,27 @@ import BlogFooter from "@/components/Blog/BlogFooter";
 import BlogNavbar from "@/components/Blog/Navbar";
 import LoadingSkeleton from "@/components/Loading/LoadingSkeleton";
 import Pagination from "@/components/Pagination";
+import { generateSlug } from "@/lib/utils";
 import { IArticle } from "@/models/blog";
 import { useQuery } from "@tanstack/react-query";
 import Head from "next/head";
 import { useState } from "react";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+
+interface IPost {
+  id: number,
+  title: string,
+  blog_body: string,
+  date_posted: string,
+  postedby_name: string,
+  postedby_id: number,
+  posted_by_image: string,
+  blog_media: {
+    thumbnail:string,
+    type:string
+  }[]
+}
 
 function Index() {
   const [postsPerPage] = useState(10);
@@ -18,7 +33,7 @@ function Index() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["articles"],
     queryFn: () =>
-      fetch(`https://townhall.empl-dev.site/api/blog/list_writeups?currentPage=${currentPage}&limit=${limit}`).then((res) =>
+      fetch(`${API_URL}/blog/list_writeups?currentPage=${currentPage}&limit=${limit}`).then((res) =>
         res.json(),
       ),
   })
@@ -43,11 +58,16 @@ function Index() {
     )
   }
   const article = data?.data;
+  const article_with_Slug = article.map((a:IPost)=>({
+      ...a,
+      slug: generateSlug(a.title)
+
+  }))
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = article?.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPages = Math.ceil(article.length / postsPerPage);
+  const currentPosts = article_with_Slug?.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(article_with_Slug.length / postsPerPage);
   const isLastPage = currentPage === totalPages;
 
 

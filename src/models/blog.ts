@@ -11,5 +11,6 @@ interface IBlogMedia {
     posted_by_image: string,
     postedby_id: number,
     postedby_name: string,
-    title: string
+    title: string,
+    slug:String,
   }

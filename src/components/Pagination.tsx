@@ -49,7 +49,7 @@ const Pagination = ({ currentPage, isLastPage, totalPages, onPageChange }: IProp
                     >
                         <Button
                             variant="solid"
-                            className={`border-0 bg-transparent  font-normal ${pageNumber + 1 === currentPage ? "font-semibold text-townhall-black100 pointer-events-none rounded-lg px-3 py-2 bg-red-50" : "hover:hover:bg-gray-200 font-semibold text-townhall-black100 cursor-pointer rounded-lg px-3 py-2 bg-red-50 transition-colors hover:ease-out"
+                            className={`border-0 bg-transparent  font-normal ${pageNumber + 1 === currentPage ? "font-semibold text-townhall-black100 pointer-events-none rounded-lg px-3 py-2 bg-[#e3e3e4]" : "hover:hover:bg-gray-200 font-semibold text-townhall-black100 cursor-pointer rounded-lg px-3 py-2 bg-red-50 transition-colors hover:ease-out"
                                 }`}
                             onClick={() => handlePageChange(pageNumber + 1)}
                             disabled={pageNumber + 1 === currentPage}

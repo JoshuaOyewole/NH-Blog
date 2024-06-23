@@ -8,10 +8,11 @@ import { removeHtmlTags } from '@/lib/utils';
 import { IArticle } from '@/models/blog';
 
 function BlogCard({ ...props }: IArticle) {
-  const { title, postedby_name, date_posted, blog_body, id } = props;
+  const { title, postedby_name, date_posted, blog_body, id, slug} = props;
+  
   return (
     <Box as='div' className="flex flex-col">
-      <Link href={`/${id}`} className='block rounded-3xl hover:transition-all' >
+      <Link href={`/${id}/${slug}`} className='block rounded-3xl hover:transition-all' >
         <Image src={"https://imagedelivery.net/BgK_7WpdFl6ls9CBX3q89Q/24499ccb-b9ba-4c6f-bfe4-c965fb893700/public"} priority alt='blog img' width={500} height={350} className='rounded-xl w-full grayscale-0 hover:grayscale' />
         <Heading className='!font-roboto-slab text-[#302f2f] !text-2xl lg:!text-3xl my-5 !font-medium hover:text-[#506fd9ed] transition-all'> {title}</Heading>
         <Box as='div' className='text-[#505050]'>
