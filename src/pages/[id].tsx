@@ -7,6 +7,7 @@ import Link from "next/link";
 import BlogNavbar from "@/components/Blog/Navbar";
 import { Metadata, ResolvingMetadata } from "next";
 import { generateSlug, removeHtmlTags } from "@/lib/utils";
+import Head from "next/head";
 
 const sans = Open_Sans({
   subsets: ['latin'],
@@ -49,6 +50,13 @@ interface IPostt {
 export default function Post(post: IPostt) {
   return (
     <>
+    <Head>
+        <title>{post.post.data.title}</title>
+        <meta
+          name="description"
+          content="Welcome to Townhall. Townhall is a community mobilization app that enables organizations, the public, and causes to create & efficiently manage localized assemblies, interaction, and momentum around common goals."
+        />
+      </Head>
       <BlogNavbar />
       <div className={`flex flex-col lg:flex-row gap-x-10 w-full md:w-[95%] lg:w-[90%] min-[1280px]:w-4/5 mx-auto px-4 lg:px-8 ${sans.className} mb-20`}>
 
@@ -113,22 +121,16 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // read route params
   const id = params.id
+  const res = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${id}`).then((res) => res.json());
 
-  // fetch data
-  const product = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${params.id}`).then((res) => res.json());
-
-  console.log("Hello world");
-  console.log(product);
-  
-  
-
+  const article = res.data;
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
 
   return {
-    title: "Hello world",
+    title: article.title,
+    description:article.title,
     openGraph: {
       images: ['/some-specific-page-image.jpg', ...previousImages],
     },
@@ -137,12 +139,8 @@ export async function generateMetadata(
 
 // This also gets called at build time
 export async function getStaticProps({ params }: any) {
-  // params contains the post `id`.
-  // If the route is like /posts/1, then params.id is 1
   const res = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${params.id}`)
   const post = await res.json()
-
-  // Pass post data to the page via props
   return { props: { post } }
 }
 
