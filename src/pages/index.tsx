@@ -8,7 +8,7 @@ import { IArticle } from "@/models/blog";
 import { useQuery } from "@tanstack/react-query";
 import Head from "next/head";
 import { useState } from "react";
-//const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.API_URL;
 
 
 interface IPost {
@@ -33,7 +33,7 @@ function Index() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["articles"],
     queryFn: () =>
-      fetch(`https://townhall.empl-dev.site/api/blog/list_writeups?currentPage=${currentPage}&limit=${limit}`).then((res) =>
+      fetch(`${API_URL}/blog/list_writeups?currentPage=${currentPage}&limit=${limit}`).then((res) =>
         res.json(),
       ),
   })
