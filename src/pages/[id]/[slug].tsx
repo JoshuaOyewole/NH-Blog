@@ -9,7 +9,7 @@ import { generateSlug, removeHtmlTags } from "@/lib/utils";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import BlogFooter from "@/components/Blog/BlogFooter";
-const API_URL = process.env.API_URL;
+//const API_URL = process.env.API_URL;
 
 const sans = Open_Sans({
   subsets: ['latin'],
@@ -127,14 +127,14 @@ export async function getStaticProps({ params }: Props) {
 
   const { id, slug } = params;
 
-  const res = await fetch(`${API_URL}/blog/writeup_details?id=${params.id}`)
+  const res = await fetch(`https://townhall.empl-dev.site/api/blog/writeup_details?id=${params.id}`)
   const post = await res.json()
   return { props: { post } }
 }
 
 // This function gets called at build time
 export async function getStaticPaths() {
-  const res = await fetch(`${API_URL}/blog/list_writeups?currentPage=${1}&limit=100`)
+  const res = await fetch(`https://townhall.empl-dev.site/api/blog/list_writeups?currentPage=${1}&limit=100`)
   const response = await res.json();
   const posts = response.data;
   const posts_with_Slug = posts.map((a:IPost)=>({
