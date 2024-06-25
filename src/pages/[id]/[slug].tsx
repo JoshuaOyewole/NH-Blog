@@ -99,7 +99,7 @@ export default function Post(post: IPostt) {
           </div>
           <div dangerouslySetInnerHTML={{ __html: post.post.data.blog_body }} className='mt-10 lg:text-lg min-[2000px]:text-[2rem] min-[2000px]:!leading-[4rem] !leading-[2.4rem] text-[#41505f]' />
 
-          <Card className='bg-white py-3 lg:py-6 rounded-lg px-4 lg:px-8 mt-20 !flex gap-x-4 items-center border border-solid border-[#ebebf3] min-[1800px]:min-h-[20rem] min-[1800px]:px-8'>
+          <Card className='bg-white py-3 lg:py-6 rounded-lg !px-4 lg:!px-8 mt-20 !flex gap-x-4 items-center border border-solid border-[#ebebf3] min-[1800px]:min-h-[20rem] min-[1800px]:!px-8'>
             <Box as='div' >
               <Image src={post.post.data.posted_by_image} className='rounded-full h-[5rem] w-[5rem] lg:h-[9rem] lg:w-[9rem] object-cover' width={200} height={200} alt={`Author name is ${post.post.data.postedby_name}`} />
             </Box>
