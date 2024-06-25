@@ -13,7 +13,8 @@ function BlogCard({ ...props }: IArticle) {
   return (
     <Box as='div' className="flex flex-col">
       <Link href={`/${id}/${slug}`} className='block rounded-3xl hover:transition-all' >
-        <Image src={blog_media[0].thumbnail} priority alt='blog img' width={500} height={350} className='rounded-xl w-full grayscale-0 hover:grayscale' />
+      <div style={{backgroundImage:`url(${blog_media[0].thumbnail})`}} className={"rounded-xl grayscale-0 hover:grayscale h-[15rem] lg:h-[21.9rem] w-full bg-center bg-cover bg-no-repeat object-cover"}/>
+        {/* <Image src={blog_media[0].thumbnail} priority alt='blog img' width={500} height={500} className='' /> */}
         <Heading className='!font-roboto-slab text-[#302f2f] !text-2xl lg:!text-3xl my-5 !font-medium hover:text-[#506fd9ed] transition-all'> {title}</Heading>
         <Box as='div' className='text-[#505050]'>
           <Text className='font-semibold'>{postedby_name} | {" "}</Text> <Text className='font-semibold'>{moment(date_posted).format("LLL")}</Text>

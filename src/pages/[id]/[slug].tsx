@@ -94,7 +94,7 @@ export default function Post(post: IPostt) {
               <Clock size={16} /> {moment(post.post.data.date_posted).format("LLL")}
             </span>
           </div>
-          <div className="article_img h-[20rem] lg:h-[25rem] min-[2000px]:h-[40rem] my-5 md:my-10 bg-cover bg-center rounded-xl" style={{ backgroundImage: `url(${post.post.data.blog_media[0]?.thumbnail})` }}>
+          <div className="article_img h-[15rem] lg:h-[25rem] min-[2000px]:h-[40rem] my-5 object-cover md:my-10 bg-cover bg-center rounded-xl" style={{ backgroundImage: `url(${post.post.data.blog_media[0]?.thumbnail})` }}>
             {/*   <Image src={post.post.data.blog_media[0].thumbnail} alt={post.post.data.title} className='w-full h-[25rem] rounded-lg bg-center' width={200} height={100} /> */}
           </div>
           <div dangerouslySetInnerHTML={{ __html: post.post.data.blog_body }} className='mt-10 lg:text-lg min-[2000px]:text-[2rem] min-[2000px]:!leading-[4rem] !leading-[2.4rem] text-[#41505f]' />
